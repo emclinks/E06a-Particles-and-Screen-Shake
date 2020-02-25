@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
@@ -8,9 +8,31 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0.844849, 0.515625, 1, 1, 0.970459, 0.914063, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
 [sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 17.5
+flag_disable_z = true
+direction = Vector3( 100, 25, 25 )
+spread = 180.0
+flatness = 0.26
+gravity = Vector3( 15, -50, 30 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 21.51
+scale_random = 1.0
+color_ramp = SubResource( 3 )
+hue_variation = 0.08
+hue_variation_random = 0.35
+
+[sub_resource type="CanvasItemMaterial" id=5]
+
+[sub_resource type="ParticlesMaterial" id=6]
 lifetime_randomness = 0.85
 flag_disable_z = true
 gravity = Vector3( 0, 3, 0 )
@@ -22,9 +44,9 @@ color = Color( 0.901961, 0.85098, 0.972549, 1 )
 hue_variation = 0.02
 hue_variation_random = 1.0
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=7]
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 45, 35, 2 )
 flag_disable_z = true
@@ -41,23 +63,28 @@ script = ExtResource( 2 )
 
 [node name="Particles1" type="Particles2D" parent="."]
 material = SubResource( 1 )
-position = Vector2( 128, 256 )
+position = Vector2( 131, 262 )
 rotation = 3.14159
 scale = Vector2( 0.65, 1 )
+lifetime = 1.5
+speed_scale = 0.25
+randomness = 1.0
+process_material = SubResource( 4 )
 texture = ExtResource( 3 )
 
 [node name="Particles2" type="Particles2D" parent="."]
-material = SubResource( 2 )
+material = SubResource( 5 )
 position = Vector2( 512, 256 )
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 texture = ExtResource( 5 )
 
 [node name="Particles3" type="Particles2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 7 )
 position = Vector2( 899, 224 )
-process_material = SubResource( 5 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 304 )
+current = true
 script = ExtResource( 1 )
